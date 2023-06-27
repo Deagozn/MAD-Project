@@ -5,29 +5,30 @@
 
         <item
             android:id="@+id/nav_bookings"
-            android:title="Bookings"
-            android:icon="@drawable/booking" />
+            android:icon="@drawable/booking"
+            android:title="Bookings" />
 
         <item
             android:id="@+id/nav_seat_map"
-            android:title="Seat Map"
-            android:icon="@drawable/map" />
+            android:icon="@drawable/map"
+            android:title="Seat Map" />
 
         <item
             android:id="@+id/nav_qr_code"
-            android:title="QR Code"
-            android:icon="@drawable/baseline_qr_code_2_24" />
+            android:icon="@drawable/baseline_qr_code_2_24"
+            android:title="QR Code" />
 
         <item
             android:id="@+id/nav_finder"
-            android:title="Library Finder"
-            android:icon="@drawable/finder" />
+            android:icon="@drawable/finder"
+            android:title="Library Finder" />
 
     </group>
 
-    <group android:checkableBehavior="single">
-        <item android:title="">
-            <menu>
+
+    <item android:title="">
+        <menu>
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_about"
                     android:icon="@drawable/about"
@@ -42,22 +43,24 @@
                     android:id="@+id/nav_feedback"
                     android:icon="@drawable/feedback"
                     android:title="Feedback" />
-            </menu>
-        </item>
-    </group>
+            </group>
+        </menu>
+    </item>
+
 
     <item android:title="">
         <menu>
-            <item
-                android:id="@+id/change_user"
-                android:title="Change User"
-                android:icon="@drawable/change_user" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/change_user"
+                    android:icon="@drawable/change_user"
+                    android:title="Change User" />
 
-            <item
-                android:id="@+id/logout"
-                android:title="Logout"
-                android:icon="@drawable/logout" />
-
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/logout"
+                    android:title="Logout" />
+            </group>
         </menu>
     </item>
 
