@@ -51,7 +51,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
                     android:background="@color/cardview_shadow_end_color"
-                    android:foreground="@drawable/Notifications"
+                    android:foreground="@drawable/notifications"
                     android:paddingLeft="20dp"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
