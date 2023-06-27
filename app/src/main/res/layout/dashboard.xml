@@ -37,7 +37,7 @@
                 android:layout_width="73dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="?android:attr/windowSplashScreenBackground"
+                android:backgroundTint="@color/cardview_shadow_end_color"
                 app:srcCompat="@drawable/notifications" />
 
         </LinearLayout>
