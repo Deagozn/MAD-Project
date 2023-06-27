@@ -5,10 +5,10 @@
     android:layout_height="200dp"
     android:background="@drawable/header_bg"
     android:gravity="bottom"
-    android:padding="5dp">
+    android:padding="30px">
 
     <ImageView
-        android:layout_width="100dp"
+        android:layout_width="136dp"
         android:layout_height="100dp"
         android:src="@drawable/app_logo2" />
 
