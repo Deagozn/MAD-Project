@@ -7,8 +7,18 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="0dp"
     android:background="#FFFFFF"
-    tools:context=".Main"
-    tools:ignore="HardcodedText">
+    tools:context=".Dashboard"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        app:headerLayout="@layout/menu_layout"
+        app:menu="@menu/menu"
+        android:layout_gravity="start"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,7 +45,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar2"
+                    android:id="@+id/toolbar"
                     android:layout_width="58dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
