@@ -114,7 +114,7 @@
                                 android:textStyle="bold" />
 
                             <EditText
-                                android:id="@+id/editTextText"
+                                android:id="@+id/no_of_ppl"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
@@ -144,7 +144,7 @@
                             android:orientation="horizontal">
 
                             <Button
-                                android:id="@+id/button5"
+                                android:id="@+id/start_time"
                                 android:layout_width="70dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="30dp"
@@ -163,7 +163,7 @@
                                 android:textStyle="bold" />
 
                             <Button
-                                android:id="@+id/button6"
+                                android:id="@+id/end_time"
                                 android:layout_width="70dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
@@ -208,7 +208,7 @@
                             </ScrollView>
 
                             <Button
-                                android:id="@+id/button7"
+                                android:id="@+id/add_book"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
@@ -254,7 +254,7 @@
                                         android:textStyle="bold" />
 
                                     <Button
-                                        android:id="@+id/button8"
+                                        android:id="@+id/select_seat1"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="20dp"
@@ -269,7 +269,7 @@
                         </ScrollView>
 
                         <Button
-                            android:id="@+id/button3"
+                            android:id="@+id/book_seats"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="70dp"

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -33,7 +32,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
 
-        notif_button = findViewById(R.id.button);
+        notif_button = findViewById(R.id.notif_button);
 
         notif_button.setOnClickListener(new View.OnClickListener() {
             @Override
