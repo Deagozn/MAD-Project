@@ -29,7 +29,7 @@
             android:paddingTop="3dp">
 
             <ImageButton
-                android:id="@+id/back_about"
+                android:id="@+id/back_bookings"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_weight="1"
