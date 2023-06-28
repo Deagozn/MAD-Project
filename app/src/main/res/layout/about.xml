@@ -32,6 +32,7 @@
                 android:id="@+id/back_about"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
+                android:layout_weight="1"
                 android:backgroundTint="@color/cardview_shadow_end_color"
                 app:srcCompat="@drawable/back"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />

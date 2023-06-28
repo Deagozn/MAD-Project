@@ -27,6 +27,10 @@
             android:exported="false"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".Notifications"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".Dashboard"
             android:exported="true"
             android:theme="@style/AppTheme" >
