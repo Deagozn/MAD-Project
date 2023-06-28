@@ -7,7 +7,7 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 
-public class Splash extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 // Start the main activity
-                Intent intent = new Intent(Splash.this, Dashboard.class);
+                Intent intent = new Intent(SplashActivity.this, Dashboard.class);
                 startActivity(intent);
 
                 // Close the splash activity
