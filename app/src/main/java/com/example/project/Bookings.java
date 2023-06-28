@@ -7,14 +7,17 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TimePicker;
 
 import java.util.Locale;
 
-public class Bookings extends AppCompatActivity {
+public class Bookings extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private TabHost tabHost;
     private ImageButton back_button;
@@ -55,6 +58,12 @@ public class Bookings extends AppCompatActivity {
         spec.setIndicator("Existing");
 
         tabHost.addTab(spec);
+
+        Spinner spinner = findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.libraries, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
     public void popTimePickerStart(View view) {
@@ -91,5 +100,15 @@ public class Bookings extends AppCompatActivity {
 
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        // setup library selected variables here
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
