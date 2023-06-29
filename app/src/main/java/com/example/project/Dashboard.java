@@ -75,6 +75,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         } else if (item.getItemId() == R.id.nav_bookings) {
             Intent intent = new Intent(Dashboard.this, Bookings.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.nav_finder) {
+            Intent intent = new Intent(Dashboard.this, LibraryFinder.class);
+            startActivity(intent);
         }
         return true;
     }
