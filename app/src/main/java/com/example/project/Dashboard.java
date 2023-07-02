@@ -84,6 +84,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         } else if(item.getItemId() == R.id.nav_feedback) {
             Intent intent=new Intent(Dashboard.this,Feedback.class);
             startActivity(intent);
+        } else if(item.getItemId() == R.id.change_user) {
+            Intent intent=new Intent(Dashboard.this,LoginPage.class);
+            startActivity(intent);
         } else if (item.getItemId() == R.id.logout) {
             finishAffinity();
             System.exit(0);
