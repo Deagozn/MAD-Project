@@ -36,16 +36,13 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextText5"
+            android:id="@+id/editTextTextEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
-            android:layout_marginBottom="35dp"
             android:ems="10"
-            android:inputType="text"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:inputType="textEmailAddress"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textView51"
