@@ -7,23 +7,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class ForgetPasswordPt1 extends AppCompatActivity {
+public class ForgetPasswordPt2 extends AppCompatActivity {
 
-    Button cont_button;
+    Button resetpw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.forget_password_pt1);
+        setContentView(R.layout.forget_passwordt2);
 
-        cont_button = findViewById(R.id.forgetpw_continue);
-        cont_button.setOnClickListener(new View.OnClickListener() {
+        resetpw = findViewById(R.id.forgetpw_resetpw);
+        resetpw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ForgetPasswordPt1.this, ForgetPasswordPt2.class);
+                Intent intent = new Intent(ForgetPasswordPt2.this, LoginPage.class);
                 startActivity(intent);
             }
         });
-
     }
 }
