@@ -10,6 +10,8 @@ import android.widget.Button;
 public class LoginPage extends AppCompatActivity {
     Button forgetpw;
 
+    Button createAcc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,15 @@ public class LoginPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginPage.this, ForgetPasswordPt1.class);
+                startActivity(intent);
+            }
+        });
+
+        createAcc = findViewById(R.id.create_acc);
+        createAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginPage.this, CreateAccountPt1.class);
                 startActivity(intent);
             }
         });
