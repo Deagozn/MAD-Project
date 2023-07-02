@@ -78,12 +78,16 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         } else if (item.getItemId() == R.id.nav_finder) {
             Intent intent = new Intent(Dashboard.this, LibraryFinder.class);
             startActivity(intent);
-        } else if (item.getItemId()==R.id.nav_settings) {
+        } else if (item.getItemId() == R.id.nav_settings) {
             Intent intent=new Intent(Dashboard.this,AccountSettings.class);
             startActivity(intent);
-        }else if(item.getItemId()==R.id.nav_feedback){
+        } else if(item.getItemId() == R.id.nav_feedback) {
             Intent intent=new Intent(Dashboard.this,Feedback.class);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.logout) {
+            finishAffinity();
+            System.exit(0);
+
         }
         return true;
     }
