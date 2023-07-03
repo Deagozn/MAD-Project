@@ -17,13 +17,17 @@
         android:theme="@style/Theme.Project"
         tools:targetApi="31">
         <activity
-            android:name=".CreateAccountPt2"
+            android:name=".QRCode"
             android:exported="false"
             android:theme="@style/AppTheme"/>
         <activity
+            android:name=".CreateAccountPt2"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".CreateAccountPt1"
             android:exported="false"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ForgetPasswordPt2"
             android:exported="false"

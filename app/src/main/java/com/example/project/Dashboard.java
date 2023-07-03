@@ -70,7 +70,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_about) {
-            Intent intent = new Intent(Dashboard.this, About.class);
+            Intent intent = new Intent(Dashboard.this, Bookings.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_bookings) {
             Intent intent = new Intent(Dashboard.this, Bookings.class);
@@ -79,17 +79,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             Intent intent = new Intent(Dashboard.this, LibraryFinder.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_settings) {
-            Intent intent=new Intent(Dashboard.this,AccountSettings.class);
+            Intent intent=new Intent(Dashboard.this, AccountSettings.class);
             startActivity(intent);
         } else if(item.getItemId() == R.id.nav_feedback) {
-            Intent intent=new Intent(Dashboard.this,Feedback.class);
+            Intent intent=new Intent(Dashboard.this, Feedback.class);
             startActivity(intent);
         } else if(item.getItemId() == R.id.change_user) {
-            Intent intent=new Intent(Dashboard.this,LoginPage.class);
+            Intent intent=new Intent(Dashboard.this, LoginPage.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.logout) {
             finishAffinity();
             System.exit(0);
+        } else if(item.getItemId() == R.id.nav_qr_code) {
+            Intent intent=new Intent(Dashboard.this, QRCode.class);
+            startActivity(intent);
 
         }
         return true;
