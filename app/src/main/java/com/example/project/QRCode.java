@@ -1,5 +1,6 @@
 package com.example.project;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.InputQueue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,10 +22,9 @@ import com.google.zxing.common.BitMatrix;
 public class QRCode extends AppCompatActivity {
 
     private ImageView QRCode;
-
     private EditText dataInput;
-
     private Button generateQrCode;
+    private ImageButton back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,15 @@ public class QRCode extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Data cannot be empty", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        back = findViewById(R.id.back_qrcode);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(QRCode.this, Dashboard.class);
+                startActivity(intent);
             }
         });
     }

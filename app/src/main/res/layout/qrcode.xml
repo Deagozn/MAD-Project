@@ -8,6 +8,40 @@
 
     <!--We are using this image
         view to display our QR code-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="clip_horizontal"
+        android:orientation="horizontal"
+        android:paddingLeft="2dp"
+        android:paddingTop="3dp">
+
+        <ImageButton
+            android:id="@+id/back_qrcode"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/cardview_shadow_end_color"
+
+            android:src="@drawable/back"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR Code"
+        android:textSize="34sp"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="145dp"
+        android:textStyle="bold" />
+
     <ImageView
         android:id="@+id/idIVQrcode"
         android:layout_width="300dp"
