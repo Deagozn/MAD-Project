@@ -21,7 +21,7 @@ public class QRCode extends AppCompatActivity {
 
     private ImageView QRCode;
 
-    private EditText datain;
+    private EditText dataInput;
 
     private Button generateQrCode;
 
@@ -31,7 +31,7 @@ public class QRCode extends AppCompatActivity {
         setContentView(R.layout.qrcode);
 
         QRCode = findViewById(R.id.idIVQrcode);
-        datain = findViewById(R.id.idEdt);
+        dataInput = findViewById(R.id.idEdt);
         generateQrCode = findViewById(R.id.idBtnGenerateQR);
         int size = 500;
 
@@ -39,7 +39,7 @@ public class QRCode extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String data;
-                data = datain.getText().toString();
+                data = dataInput.getText().toString();
 
                 if (!data.isEmpty()) {
                     Bitmap bitmap = null;
