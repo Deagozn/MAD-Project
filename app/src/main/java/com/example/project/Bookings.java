@@ -14,6 +14,9 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TimePicker;
+import java.util.Calendar;
+import android.widget.DatePicker;
+import android.app.DatePickerDialog;
 
 import java.util.Locale;
 
@@ -25,6 +28,8 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private int start_hour, start_minute;
     private Button end_hours;
     private int end_hour, end_minute;
+
+    private Button select_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,36 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        select_date = findViewById(R.id.select_date);
+        select_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        // on below line we are passing context.
+                        Bookings.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                select_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        },
+                        // on below line we are passing year,
+                        // month and day for selected date in our date picker.
+                        year, month, day);
+                // at last we are calling show to
+                // display our date picker dialog.
+                datePickerDialog.show();
+            }
+        });
     }
 
     public void popTimePickerStart(View view) {
