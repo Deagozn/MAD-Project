@@ -31,6 +31,8 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
     private Button select_date;
 
+    private Button select_seat1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +99,16 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                 // at last we are calling show to
                 // display our date picker dialog.
                 datePickerDialog.show();
+            }
+        });
+
+        select_seat1 = findViewById(R.id.select_seat1);
+
+        select_seat1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Bookings.this, BookingSeats.class);
+                startActivity(intent);
             }
         });
     }
