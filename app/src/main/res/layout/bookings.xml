@@ -128,6 +128,31 @@
                                 tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView63"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="1"
+                                android:text="Date:"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/button"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="150dp"
+                                android:layout_weight="1"
+                                android:text="Select Date" />
+                        </LinearLayout>
+
                         <TextView
                             android:id="@+id/textView19"
                             android:layout_width="match_parent"
@@ -150,8 +175,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="30dp"
                                 android:layout_weight="1"
-                                android:text="Start time"
                                 android:onClick="popTimePickerStart"
+                                android:text="Start time"
                                 app:cornerRadius="10dp" />
 
                             <TextView
@@ -170,8 +195,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="30dp"
                                 android:layout_weight="1"
-                                android:text="End time"
                                 android:onClick="popTimePickerEnd"
+                                android:text="End time"
                                 app:cornerRadius="10dp" />
                         </LinearLayout>
 
@@ -234,7 +259,7 @@
 
                         <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="175dp">
+                            android:layout_height="115dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"

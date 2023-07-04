@@ -23,11 +23,19 @@
             android:layout_marginRight="50dp"
             app:srcCompat="@drawable/app_logo2" />
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/profilepic" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            app:cardCornerRadius="70dp">
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/profilepic" />
+
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/create_pfp"
