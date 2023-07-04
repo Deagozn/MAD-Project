@@ -70,7 +70,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.nav_about) {
-            Intent intent = new Intent(Dashboard.this, Bookings.class);
+            Intent intent = new Intent(Dashboard.this, About.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.nav_bookings) {
             Intent intent = new Intent(Dashboard.this, Bookings.class);
