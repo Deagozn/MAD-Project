@@ -24,6 +24,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     Toolbar toolbar;
 
     Button notif_button;
+    Button add_booking;
 
 
 
@@ -32,7 +33,16 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
 
+        add_booking=findViewById(R.id.add_booking);
         notif_button = findViewById(R.id.notif_button);
+        add_booking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dashboard.this, Bookings.class);
+                startActivity(intent);
+
+            }
+        });
 
         notif_button.setOnClickListener(new View.OnClickListener() {
             @Override
