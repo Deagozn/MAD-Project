@@ -1,17 +1,23 @@
 package com.example.project;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 
-
 public class SplashActivity extends AppCompatActivity {
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+
+        // Initialize MediaPlayer and load the sound file
+        mediaPlayer = MediaPlayer.create(this, R.raw.splash_sound);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -23,5 +29,25 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         }, 6300);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Start playing the sound effect when the activity is resumed
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Pause and release the MediaPlayer when the activity is paused
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
