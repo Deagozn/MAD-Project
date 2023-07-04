@@ -9,6 +9,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/back_loginpage"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="#00FFFFFF"
+            app:srcCompat="@drawable/back"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -103,7 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="25dp"
                 android:layout_weight="1"
-                android:text="Remember Me" />
+                android:text="Remember Me"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <Button

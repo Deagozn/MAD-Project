@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class ForgetPasswordPt1 extends AppCompatActivity {
 
     Button cont_button;
+    ImageButton back_fpass1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,13 @@ public class ForgetPasswordPt1 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        back_fpass1=findViewById(R.id.back_forgotpass1);
+        back_fpass1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(ForgetPasswordPt1.this,LoginPage.class);
+                startActivity(intent);
+            }
+        });
     }
 }
