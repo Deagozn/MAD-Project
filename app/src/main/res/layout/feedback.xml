@@ -115,6 +115,9 @@
             app:cardBackgroundColor="#D8d8d8"
             app:cardCornerRadius="25dp">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </androidx.cardview.widget.CardView>
 
         <Button
