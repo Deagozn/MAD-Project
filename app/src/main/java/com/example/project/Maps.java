@@ -80,7 +80,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             Marker library2 = mMap.addMarker(new MarkerOptions().position(LIBRARY2).title("Queenstown Public Library"));
             Marker library3 = mMap.addMarker(new MarkerOptions().position(LIBRARY3).title("Bedok Public Library"));
             Marker library4 = mMap.addMarker(new MarkerOptions().position(LIBRARY4).title("Tampines Regional Library"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 5));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 10));
         }
         else {
             LIBRARY = new LatLng(lat, lon);
