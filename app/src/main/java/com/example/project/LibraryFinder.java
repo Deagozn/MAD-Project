@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ public class LibraryFinder extends AppCompatActivity {
     private CardView queenstown;
     private CardView bedok;
     private CardView tampines;
+    private Button show_all;
 
     private com.example.project.LocationTracker locationTracker;
 
@@ -88,6 +90,18 @@ public class LibraryFinder extends AppCompatActivity {
                 intent.putExtra("NAME", "Tampines Regional Library");
                 startActivity(intent);
 
+            }
+        });
+
+        show_all = findViewById(R.id.libraries_ard);
+        show_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LibraryFinder.this, Maps.class);
+                intent.putExtra("MYLATITUDE", locationTracker.getLatitude());
+                intent.putExtra("MYLONGITUDE", locationTracker.getLongitude());
+                intent.putExtra("SHOW_ALL", true);
+                startActivity(intent);
             }
         });
 

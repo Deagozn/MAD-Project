@@ -22,10 +22,17 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     private double lat;
     private double lon;
     private String libraryName;
-    //private double myLat;
-    //private double myLon;
+    private double myLat;
+    private double myLon;
     private LatLng LIBRARY;
-    //private LatLng ME;
+    private LatLng ME;
+    private boolean all;
+    private LatLng LIBRARY1;
+    private LatLng LIBRARY2;
+    private LatLng LIBRARY3;
+    private LatLng LIBRARY4;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +41,10 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         lat = getIntent().getDoubleExtra("LATITUDE", 0);
         lon = getIntent().getDoubleExtra("LONGITUDE", 0);
         libraryName = getIntent().getStringExtra("NAME");
-        //myLat = getIntent().getDoubleExtra("MYLATITUDE", 0);
-        //myLon = getIntent().getDoubleExtra("MYLONGITUDE", 0);
+        myLat = getIntent().getDoubleExtra("MYLATITUDE", 0);
+        myLon = getIntent().getDoubleExtra("MYLONGITUDE", 0);
+        all = getIntent().getBooleanExtra("SHOW_ALL",false);
+
 
         binding = MapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -59,13 +68,30 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LIBRARY = new LatLng(lat, lon);
-        //ME = new LatLng(myLat, myLon);
+        if(all) {
+            LIBRARY1 = new LatLng(1.3329167111885247 ,103.73949993247449);      // Jurong
+            LIBRARY2 = new LatLng(1.29861379714202 , 103.80516537993356);       // Queenstown
+            LIBRARY3 = new LatLng(1.3268243723778717 , 103.93168993455336);     // Bedok
+            LIBRARY4 = new LatLng(1.3522289713983806 , 103.9411640941522);      // Tampines
+            ME = new LatLng(myLat, myLon);
+            Marker me = mMap.addMarker(new MarkerOptions().position(ME).title("ME\nMy location")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_me)));
+            Marker library1 = mMap.addMarker(new MarkerOptions().position(LIBRARY1).title("Jurong Regional Library"));
+            Marker library2 = mMap.addMarker(new MarkerOptions().position(LIBRARY2).title("Queenstown Public Library"));
+            Marker library3 = mMap.addMarker(new MarkerOptions().position(LIBRARY3).title("Bedok Public Library"));
+            Marker library4 = mMap.addMarker(new MarkerOptions().position(LIBRARY4).title("Tampines Regional Library"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 5));
+        }
+        else {
+            LIBRARY = new LatLng(lat, lon);
 
-        Marker hawker = mMap.addMarker(new MarkerOptions().position(LIBRARY).title(libraryName));
-//        Marker me = mMap.addMarker(new MarkerOptions().position(ME).title("ME\nMy location")
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_me3)));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LIBRARY, 15));
+            Marker library = mMap.addMarker(new MarkerOptions().position(LIBRARY).title(libraryName));
+
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LIBRARY, 15));
+        }
+
+
     }
 }
