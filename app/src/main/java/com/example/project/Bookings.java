@@ -2,17 +2,24 @@ package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import java.util.Calendar;
 import android.widget.DatePicker;
@@ -32,7 +39,12 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private Button select_date;
 
     private Button select_seat1;
+    private LinearLayout no_seats_layout;
+    private EditText no_of_ppl;
+    private Button btn_confirm;
+    private String str ="";
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,13 +114,61 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
-        select_seat1 = findViewById(R.id.select_seat1);
-
-        select_seat1.setOnClickListener(new View.OnClickListener() {
+        no_seats_layout=(LinearLayout) findViewById(R.id.no_seats_layout);
+        no_of_ppl=(EditText) findViewById(R.id.no_of_ppl);
+        btn_confirm=(Button) findViewById(R.id.load_no_of_seats);
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Bookings.this, BookingSeats.class);
-                startActivity(intent);
+                if(no_of_ppl.getText().toString().length()>0){
+                    try{
+                        no_seats_layout.removeAllViews();
+                    }catch (Throwable e){
+                        e.printStackTrace();
+                    }
+                    int length=Integer.parseInt(no_of_ppl.getText().toString());
+                    for(int i=0;i<length;i++){
+                        int q=i+1;
+                        LinearLayout linearLayout = new LinearLayout(Bookings.this);
+                        linearLayout.setId(i+100);
+                        linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+                        no_seats_layout.addView(linearLayout);
+
+                        TextView space= new TextView(Bookings.this);
+                        space.setId(i+200);
+                        space.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        space.setTextSize(16);
+                        space.setText("           ");
+                        space.setTypeface(null, Typeface.BOLD);
+                        linearLayout.addView(space);
+
+                        TextView seat_no= new TextView(Bookings.this);
+                        seat_no.setId(i+200);
+                        seat_no.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        seat_no.setTextSize(16);
+                        seat_no.setText("Seat"+" "+q+":");
+                        seat_no.setTypeface(null, Typeface.BOLD);
+                        linearLayout.addView(seat_no);
+
+                        Button select_seat = new Button(Bookings.this);
+                        select_seat.setId(i+1);
+                        select_seat.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                        select_seat.setText("Select Seat");
+                        linearLayout.addView(select_seat);
+
+                        int buttonID=select_seat.getId();
+                        select_seat1=findViewById(buttonID);
+
+                        select_seat1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Bookings.this, BookingSeats.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                }
             }
         });
     }

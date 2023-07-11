@@ -116,16 +116,22 @@
 
                             <EditText
                                 android:id="@+id/no_of_ppl"
-                                android:layout_width="wrap_content"
+                                android:layout_width="198dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
-                                android:layout_marginRight="30dp"
-                                android:layout_weight="1"
                                 android:ems="10"
                                 android:hint="Number of People"
                                 android:inputType="number"
                                 android:textSize="16sp"
+                                android:saveEnabled="false"
                                 tools:ignore="TouchTargetSizeCheck" />
+
+                            <Button
+                                android:id="@+id/load_no_of_seats"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:text="Confirm" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -262,38 +268,10 @@
                             android:layout_height="115dp">
 
                             <LinearLayout
+                                android:id="@+id/no_seats_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="250dp"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/textView25"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:layout_marginTop="10dp"
-                                        android:text="Seat 1:"
-                                        android:textSize="16sp"
-                                        android:textStyle="bold" />
-
-                                    <Button
-                                        android:id="@+id/select_seat1"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginRight="150dp"
-                                        android:layout_weight="1"
-                                        android:text="Select Seat"
-                                        app:cornerRadius="10dp" />
-                                </LinearLayout>
-
-                            </LinearLayout>
+                                android:orientation="vertical"/>
                         </ScrollView>
 
                         <Button
