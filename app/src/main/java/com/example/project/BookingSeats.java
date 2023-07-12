@@ -22,8 +22,14 @@ public class BookingSeats extends AppCompatActivity {
         back_bookingseats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent (BookingSeats.this,Bookings.class);
-                startActivity(intent);
+                Intent intent = new Intent();
+
+                intent.putExtra("selectedLibrary", intent.getIntExtra("selectedLibrary", 0));
+                intent.putExtra("selectedDate", intent.getStringExtra("selectedDate"));
+                intent.putExtra("startTime", intent.getStringExtra("startTime"));
+                intent.putExtra("endTime", intent.getStringExtra("endTime"));
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
