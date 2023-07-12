@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "705816096294",
+    "project_id": "kiasu-library",
+    "storage_bucket": "kiasu-library.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705816096294:android:91913f1f7291e98fed40e7",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705816096294-u9sbs6mc4406vp8r39gdhuq15q8jk7vm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD21iixJcOnL-BMeuxL8-PucbtQmwI8JHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705816096294-u9sbs6mc4406vp8r39gdhuq15q8jk7vm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,19 +1,19 @@
 package com.example.project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -21,13 +21,26 @@ import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import java.util.Calendar;
-import android.widget.DatePicker;
-import android.app.DatePickerDialog;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class Bookings extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     private TabHost tabHost;
     private ImageButton back_button;
@@ -44,11 +57,75 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private Button btn_confirm;
     private String str ="";
 
+    private Button save;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookings);
+
+        firestore.collection("seat_status").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (!task.getResult().isEmpty()) {
+                                // The "seat_status" collection exists
+                                Log.d("Success", "Collection 'seat_status' exists.");
+                            } else {
+                                Log.d("Creating", "Collection 'seat_status' does not exist.");
+                                // Create seat reference
+                                Map<String, Object> seat = new HashMap<>();
+                                seat.put("Seat_Number", 1);
+                                seat.put("Status", "Available");
+
+                                // Add a new document with a generated ID
+                                firestore.collection("seat_status")
+                                        .add(seat)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                Log.d("Added", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w("Error", "Error adding document", e);
+                                            }
+                                        });
+
+                                for(int i=1; i<4; i++) {
+                                    // Create seat reference
+                                    Map<String, Object> seats = new HashMap<>();
+                                    seats.put("Seat_Number", i+1);
+                                    seats.put("Status", "Available");
+
+                                    // Add a new document with a generated ID
+                                    firestore.collection("seat_status")
+                                            .add(seats)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Log.d("Added", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w("Error", "Error adding document", e);
+                                                }
+                                            });
+
+                                }
+                            }
+                        } else {
+                            Log.d("Error", "Error getting collections: ", task.getException());
+                        }
+                    }
+                });
+
 
         start_hours = findViewById(R.id.start_time);
         end_hours = findViewById(R.id.end_time);
@@ -169,6 +246,14 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                         });
                     }
                 }
+            }
+        });
+
+        save = findViewById(R.id.book_seats);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

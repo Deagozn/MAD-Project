@@ -265,13 +265,14 @@
 
                         <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="115dp">
+                            android:layout_height="115dp"
+                            tools:ignore="SpeakableTextPresentCheck">
 
                             <LinearLayout
                                 android:id="@+id/no_seats_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="250dp"
-                                android:orientation="vertical"/>
+                                android:orientation="vertical" />
                         </ScrollView>
 
                         <Button

@@ -1,9 +1,10 @@
 package com.example.project;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentActivity;
+
+import com.example.project.databinding.MapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -12,7 +13,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.project.databinding.MapsBinding;
 
 
 
@@ -80,7 +80,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             Marker library2 = mMap.addMarker(new MarkerOptions().position(LIBRARY2).title("Queenstown Public Library"));
             Marker library3 = mMap.addMarker(new MarkerOptions().position(LIBRARY3).title("Bedok Public Library"));
             Marker library4 = mMap.addMarker(new MarkerOptions().position(LIBRARY4).title("Tampines Regional Library"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 10));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ME, 15));
         }
         else {
             LIBRARY = new LatLng(lat, lon);
