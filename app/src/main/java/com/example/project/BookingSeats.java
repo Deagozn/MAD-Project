@@ -1,12 +1,12 @@
 package com.example.project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BookingSeats extends AppCompatActivity {
     ImageButton back_bookingseats;
@@ -31,9 +31,14 @@ public class BookingSeats extends AppCompatActivity {
         confirm1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BookingSeats.this, Bookings.class);
-                intent.putExtra("flag","flag");
-                startActivity(intent);
+                Intent intent = new Intent();
+
+                intent.putExtra("selectedLibrary", intent.getIntExtra("selectedLibrary", 0));
+                intent.putExtra("selectedDate", intent.getStringExtra("selectedDate"));
+                intent.putExtra("startTime", intent.getStringExtra("startTime"));
+                intent.putExtra("endTime", intent.getStringExtra("endTime"));
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 

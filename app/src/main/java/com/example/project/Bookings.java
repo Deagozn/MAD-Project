@@ -56,16 +56,21 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private EditText no_of_ppl;
     private Button btn_confirm;
     private String str ="";
-    public int temp_Library;
-
-    public String temp_date;
-
-    public String temp_starthours;
-
-    public String temp_endhours;
     private Spinner spinner;
 
     private Button save;
+
+    private static final int REQUEST_CODE = 1;
+
+    private int selectedLibrary;
+    private String selectedDate;
+    private String startTime;
+    private String endTime;
+
+    private int selectedLibrary2;
+    private String selectedDate2;
+    private String startTime2;
+    private String endTime2;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -143,14 +148,6 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         select_date = findViewById(R.id.select_date);
 
 
-        Intent intent= getIntent();
-        if (intent.hasExtra("flag")){
-            spinner.setSelection(temp_Library);
-            start_hours.setText(temp_starthours);
-            end_hours.setText(temp_endhours);
-            select_date.setText(temp_date);
-        }
-
 
         back_button = findViewById(R.id.back_bookings);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +176,20 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
 
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedLibrary = spinner.getSelectedItemPosition();
+                Log.d("check", String.valueOf(selectedLibrary));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
 
         select_date.setOnClickListener(new View.OnClickListener() {
@@ -199,6 +209,8 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 select_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                selectedDate = select_date.getText().toString();
+                                Log.d("check", selectedDate);
 
                             }
                         },
@@ -217,10 +229,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                temp_Library= spinner.getSelectedItemPosition();
-                temp_date= select_date.getText().toString();
-                temp_starthours= start_hours.getText().toString();
-                temp_endhours= end_hours.getText().toString();
+
                 if(no_of_ppl.getText().toString().length()>0){
                     try{
                         no_seats_layout.removeAllViews();
@@ -264,8 +273,14 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                         select_seat1.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
                                 Intent intent = new Intent(Bookings.this, BookingSeats.class);
-                                startActivity(intent);
+                                // Pass the selected information to the BookingSeats activity
+                                intent.putExtra("selectedLibrary", selectedLibrary);
+                                intent.putExtra("selectedDate", selectedDate);
+                                intent.putExtra("startTime", startTime);
+                                intent.putExtra("endTime", endTime);
+                                startActivityForResult(intent, REQUEST_CODE);
                             }
                         });
                     }
@@ -282,6 +297,26 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK && data != null) {
+                // Restore the selected information from the BookingSeats activity
+                selectedLibrary2 = data.getIntExtra("selectedLibrary", 0);
+                selectedDate2 = data.getStringExtra("selectedDate");
+                startTime2 = data.getStringExtra("startTime");
+                endTime2 = data.getStringExtra("endTime");
+
+                spinner.setSelection(selectedLibrary);
+                end_hours.setText(endTime);
+                start_hours.setText(startTime);
+                select_date.setText(selectedDate);
+            }
+        }
+    }
+
     public void popTimePickerStart(View view) {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -289,6 +324,8 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                 start_hour = selectedHour1;
                 start_minute = selectedMinute1;
                 start_hours.setText(String.format(Locale.getDefault(), "%02d:%02d", start_hour, start_minute));
+                startTime = start_hours.getText().toString();
+                Log.d("Check", startTime);
             }
         };
 
@@ -307,6 +344,8 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                 end_hour = selectedHour1;
                 end_minute = selectedMinute1;
                 end_hours.setText(String.format(Locale.getDefault(), "%02d:%02d", end_hour, end_minute));
+                endTime = end_hours.getText().toString();
+                Log.d("Check", endTime);
             }
         };
 
@@ -328,3 +367,5 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
     }
 }
+
+
