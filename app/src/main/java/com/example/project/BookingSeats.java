@@ -32,6 +32,7 @@ public class BookingSeats extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BookingSeats.this, Bookings.class);
+                intent.putExtra("flag","flag");
                 startActivity(intent);
             }
         });

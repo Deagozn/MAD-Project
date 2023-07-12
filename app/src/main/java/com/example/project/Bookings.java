@@ -56,6 +56,14 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private EditText no_of_ppl;
     private Button btn_confirm;
     private String str ="";
+    public int temp_Library;
+
+    public String temp_date;
+
+    public String temp_starthours;
+
+    public String temp_endhours;
+    private Spinner spinner;
 
     private Button save;
 
@@ -127,8 +135,22 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                 });
 
 
+        spinner = findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.libraries, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         start_hours = findViewById(R.id.start_time);
         end_hours = findViewById(R.id.end_time);
+        select_date = findViewById(R.id.select_date);
+
+
+        Intent intent= getIntent();
+        if (intent.hasExtra("flag")){
+            spinner.setSelection(temp_Library);
+            start_hours.setText(temp_starthours);
+            end_hours.setText(temp_endhours);
+            select_date.setText(temp_date);
+        }
+
 
         back_button = findViewById(R.id.back_bookings);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -155,13 +177,11 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
         tabHost.addTab(spec);
 
-        Spinner spinner = findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.libraries, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        select_date = findViewById(R.id.select_date);
+
         select_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,6 +217,10 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                temp_Library= spinner.getSelectedItemPosition();
+                temp_date= select_date.getText().toString();
+                temp_starthours= start_hours.getText().toString();
+                temp_endhours= end_hours.getText().toString();
                 if(no_of_ppl.getText().toString().length()>0){
                     try{
                         no_seats_layout.removeAllViews();
