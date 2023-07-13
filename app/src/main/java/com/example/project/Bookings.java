@@ -72,11 +72,21 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private String startTime2;
     private String endTime2;
 
+    private Button morebooks;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookings);
+        morebooks=findViewById(R.id.more_books);
+        morebooks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Bookings.this,SearchBooks.class);
+                startActivity(intent);
+            }
+        });
 
         firestore.collection("seat_status").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
