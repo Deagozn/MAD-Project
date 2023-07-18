@@ -135,11 +135,21 @@
                     android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="130dp"
-                    android:layout_marginTop="33dp"
+                    android:layout_marginLeft="140dp"
+                    android:layout_marginTop="35dp"
                     android:text="John"
                     android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/iduser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="140dp"
+                    android:layout_marginTop="59dp"
+                    android:text="123456"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
             </androidx.cardview.widget.CardView>
 
