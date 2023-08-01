@@ -202,13 +202,6 @@
                                         android:layout_height="wrap_content"
                                         android:text="No books selected"
                                         android:textAlignment="center" />
-
-                                    <Button
-                                        android:id="@+id/more_books"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="45dp"
-                                        android:text="Find more Books"
-                                        tools:ignore="TouchTargetSizeCheck" />
                                 </LinearLayout>
                             </ScrollView>
 

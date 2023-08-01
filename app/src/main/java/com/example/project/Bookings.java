@@ -58,6 +58,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private String str ="";
     private Spinner spinner;
 
+
     private Button save;
 
     private static final int REQUEST_CODE = 1;
@@ -72,15 +73,15 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private String startTime2;
     private String endTime2;
 
-    private Button morebooks;
+    private Button addbooks;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookings);
-        morebooks=findViewById(R.id.more_books);
-        morebooks.setOnClickListener(new View.OnClickListener() {
+        addbooks = findViewById(R.id.add_book);
+        addbooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(Bookings.this,SearchBooks.class);
@@ -156,6 +157,8 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         start_hours = findViewById(R.id.start_time);
         end_hours = findViewById(R.id.end_time);
         select_date = findViewById(R.id.select_date);
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.books, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
 

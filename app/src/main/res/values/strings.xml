@@ -12,6 +12,14 @@
         <item>Tampines Regional Library</item>
     </string-array>
 
+    <string-array name="books">
+        <item>Click To Select Books</item>
+        <item>Jurong Regional Library</item>
+        <item>Queenstown Public Library</item>
+        <item>Bedok Public Library</item>
+        <item>Tampines Regional Library</item>
+    </string-array>
+
     <string name="qr_code">qr_code</string>
     <string name="enter_your_info">Enter your info</string>
     <string name="generate_qr_code">Generate QR Code</string>
