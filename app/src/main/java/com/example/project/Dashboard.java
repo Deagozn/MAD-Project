@@ -104,9 +104,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             Intent intent=new Intent(Dashboard.this, QRCode.class);
             startActivity(intent);
 
-        }else if(item.getItemId()==R.id.nav_seat_map){
+        } else if(item.getItemId()==R.id.nav_seat_map){
             Intent intent= new Intent (Dashboard.this,SeatMap.class);
-            startActivity(intent);}
+            startActivity(intent);
+        } else if(item.getItemId()==R.id.nav_chatbot){
+        Intent intent= new Intent (Dashboard.this,Chatbot.class);
+        startActivity(intent);}
+
         return true;
     }
 

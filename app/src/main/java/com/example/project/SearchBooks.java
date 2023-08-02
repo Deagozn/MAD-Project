@@ -39,7 +39,7 @@ public class SearchBooks extends AppCompatActivity implements BooksAdapter.OnIte
     private String endTime;
 
 
-    private static final String URL_BOOKS = "http://172.22.4.253/My Api/Api.php"; // use your own ip address; to get ip address use 'ipconfig' in command prompt
+    private static final String URL_BOOKS = "http://192.168.1.7/My Api/Api.php"; // use your own ip address; to get ip address use 'ipconfig' in command prompt
 
     List<Books> books;
 
@@ -166,7 +166,7 @@ public class SearchBooks extends AppCompatActivity implements BooksAdapter.OnIte
         // You will receive the clicked book name in this method
         // You can also access other data from the SearchBooks activity as needed
         // Example: To display a toast message with the book name:
-        Toast.makeText(this, "Clicked book: " + bookName, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected book: " + bookName, Toast.LENGTH_SHORT).show();
 
         // You can start the Bookings activity with the book name and other data here.
         Intent intent = new Intent();
