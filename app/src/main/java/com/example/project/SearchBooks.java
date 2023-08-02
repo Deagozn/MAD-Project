@@ -125,7 +125,7 @@ public class SearchBooks extends AppCompatActivity implements BooksAdapter.OnIte
                     @Override
                     public void onResponse(String response) {
                         try {
-                            //converting the string to json array object
+                            //converting the string to json array object.
                             JSONArray array = new JSONArray(response);
 
                             //traversing through all the object
