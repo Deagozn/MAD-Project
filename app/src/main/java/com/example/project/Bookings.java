@@ -58,16 +58,18 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private String str ="";
     private Spinner spinner;
 
-
     private Button save;
 
     private static final int REQUEST_CODE = 1;
+    private static final int REQUEST_CODE_SEARCH_BOOK = 1;
 
     private int selectedLibrary;
     private String selectedDate;
     private String startTime;
     private String endTime;
     private TextView selectedBook;
+
+    private String bookSelected;
 
     private int selectedLibrary2;
     private String selectedDate2;
@@ -83,11 +85,28 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         setContentView(R.layout.bookings);
         addbooks = findViewById(R.id.add_book);
         selectedBook = findViewById(R.id.selectedBook);
+
+        // Get the data sent from SearchBooks activity
+        Intent intent = getIntent();
+        if (intent != null) {
+            String bookName = intent.getStringExtra("book_name");
+            int selectedLibrary = intent.getIntExtra("selectedLibrary", 0);
+            String selectedDate = intent.getStringExtra("selectedDate");
+            String startTime = intent.getStringExtra("startTime");
+            String endTime = intent.getStringExtra("endTime");
+
+            // Now you have the data, you can use it as needed in the Bookings activity
+            // For example, display the bookName in a TextView
+            TextView textViewBookName = findViewById(R.id.selectedBook);
+            textViewBookName.setText(bookName);
+        }
+
+
         addbooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(Bookings.this,SearchBooks.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_SEARCH_BOOK);
             }
         });
 
@@ -203,9 +222,6 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
             }
         });
-
-
-
 
         select_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -331,6 +347,25 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                 end_hours.setText(endTime);
                 start_hours.setText(startTime);
                 select_date.setText(selectedDate);
+                selectedBook.setText(bookSelected);
+            }
+        }
+        if (requestCode == REQUEST_CODE_SEARCH_BOOK) {
+            if (resultCode == RESULT_OK && data != null) {
+                // Get the selected book name from the SearchBooks activity
+                selectedLibrary2 = data.getIntExtra("selectedLibrary", 0);
+                selectedDate2 = data.getStringExtra("selectedDate");
+                startTime2 = data.getStringExtra("startTime");
+                endTime2 = data.getStringExtra("endTime");
+                bookSelected = data.getStringExtra("book_name");
+
+                // Now you can use the bookName as needed
+                // For example, update the selectedBook TextView
+                spinner.setSelection(selectedLibrary);
+                end_hours.setText(endTime);
+                start_hours.setText(startTime);
+                select_date.setText(selectedDate);
+                selectedBook.setText(bookSelected);
             }
         }
     }
@@ -374,10 +409,6 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
     }
-
-
-
-
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

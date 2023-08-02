@@ -1,7 +1,6 @@
 package com.example.project;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,22 +15,16 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     private Context mCtx;
     private List<Books> booksList;
     private List<Books> booksListFull;
-    private ArrayList<Books> booksArrayList;
-    ;
+    private OnItemClickListener itemClickListener;
 
-    public BooksAdapter(Context mCtx, List<Books> booksList) {
+    public BooksAdapter(Context mCtx, List<Books> booksList, OnItemClickListener itemClickListener) {
         this.mCtx = mCtx;
         this.booksList = booksList;
         this.booksListFull = new ArrayList<>(booksList);
+        this.itemClickListener = itemClickListener;
     }
 
     public void filterList(ArrayList<Books> filterlist) {
-//        // below line is to add our filtered
-//        // list in our course array list.
-//        booksArrayList = filterlist;
-//        // below line is to notify our adapter
-//        // as change in recycler view data.
-//        notifyDataSetChanged();
         booksList.clear();
         booksList.addAll(filterlist);
         notifyDataSetChanged();
@@ -41,6 +34,10 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
         booksList.clear();
         booksList.addAll(booksListFull);
         notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String bookName);
     }
 
     @Override
@@ -54,7 +51,6 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
     public void onBindViewHolder(BooksViewHolder holder, int position) {
         Books books = booksList.get(position);
         holder.textViewName.setText(books.getBookName());
-
     }
 
     @Override
@@ -67,7 +63,6 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
 
         public BooksViewHolder(View itemView) {
             super(itemView);
-
             // Initialize the TextView
             textViewName = itemView.findViewById(R.id.textViewName);
 
@@ -80,14 +75,8 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
             // Get the clicked book's name
             String bookName = booksList.get(getAdapterPosition()).getBookName();
 
-            // Create an Intent to start the BookDetailsActivity
-            Intent intent = new Intent(mCtx, Bookings.class);
-            intent.putExtra("book_name", bookName); // Pass the book name as an extra
-
-            // Start the BookDetailsActivity
-            mCtx.startActivity(intent);
-
+            // Use the interface to send the book name to the BooksAdapter
+            itemClickListener.onItemClick(bookName);
         }
-
     }
 }

@@ -25,13 +25,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SearchBooks extends AppCompatActivity {
+public class SearchBooks extends AppCompatActivity implements BooksAdapter.OnItemClickListener{
     SearchView book_search;
     RecyclerView booklist;
     private ImageButton back_books;
 
     BooksAdapter adapter;
     ArrayList<Books> list;
+
+    private Integer selectedLibrary;
+    private String selectedDate;
+    private String startTime;
+    private String endTime;
+
 
     private static final String URL_BOOKS = "http://172.22.4.253/My Api/Api.php"; // use your own ip address; to get ip address use 'ipconfig' in command prompt
 
@@ -45,15 +51,19 @@ public class SearchBooks extends AppCompatActivity {
         back_books = findViewById(R.id.back_books);
         book_search = findViewById(R.id.search_books);
         booklist = findViewById(R.id.book_list);
+
+        Intent intent = new Intent();
+        selectedLibrary = intent.getIntExtra("selectedLibrary", 0);
+        selectedDate = intent.getStringExtra("selectedDate");
+        startTime = intent.getStringExtra("startTime");
+        endTime = intent.getStringExtra("endTime");
         back_books.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-
-                intent.putExtra("selectedLibrary", intent.getIntExtra("selectedLibrary", 0));
-                intent.putExtra("selectedDate", intent.getStringExtra("selectedDate"));
-                intent.putExtra("startTime", intent.getStringExtra("startTime"));
-                intent.putExtra("endTime", intent.getStringExtra("endTime"));
+                intent.putExtra("selectedLibrary", selectedLibrary);
+                intent.putExtra("selectedDate", selectedDate);
+                intent.putExtra("startTime", startTime);
+                intent.putExtra("endTime", endTime);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -132,7 +142,7 @@ public class SearchBooks extends AppCompatActivity {
                             }
 
                             //creating adapter object and setting it to recyclerview
-                            adapter = new BooksAdapter(SearchBooks.this, books);
+                            adapter = new BooksAdapter(SearchBooks.this, books, SearchBooks.this);
                             booklist.setAdapter(adapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -148,6 +158,25 @@ public class SearchBooks extends AppCompatActivity {
 
         //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    @Override
+    public void onItemClick(String bookName) {
+        // Handle the item click event here
+        // You will receive the clicked book name in this method
+        // You can also access other data from the SearchBooks activity as needed
+        // Example: To display a toast message with the book name:
+        Toast.makeText(this, "Clicked book: " + bookName, Toast.LENGTH_SHORT).show();
+
+        // You can start the Bookings activity with the book name and other data here
+        Intent intent = new Intent();
+        intent.putExtra("book_name", bookName);
+        intent.putExtra("selectedLibrary", selectedLibrary );
+        intent.putExtra("selectedDate", selectedDate);
+        intent.putExtra("startTime", startTime);
+        intent.putExtra("endTime", endTime);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 }
