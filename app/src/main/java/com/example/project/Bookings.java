@@ -95,7 +95,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
             String startTime = intent.getStringExtra("startTime");
             String endTime = intent.getStringExtra("endTime");
 
-            // Now you have the data, you can use it as needed in the Bookings activity
+            // Now you have the data, you can use it as needed in the Bookings activity.
             // For example, display the bookName in a TextView
             TextView textViewBookName = findViewById(R.id.selectedBook);
             textViewBookName.setText(bookName);

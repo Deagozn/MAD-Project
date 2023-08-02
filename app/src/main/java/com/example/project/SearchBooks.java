@@ -168,7 +168,7 @@ public class SearchBooks extends AppCompatActivity implements BooksAdapter.OnIte
         // Example: To display a toast message with the book name:
         Toast.makeText(this, "Clicked book: " + bookName, Toast.LENGTH_SHORT).show();
 
-        // You can start the Bookings activity with the book name and other data here
+        // You can start the Bookings activity with the book name and other data here.
         Intent intent = new Intent();
         intent.putExtra("book_name", bookName);
         intent.putExtra("selectedLibrary", selectedLibrary );

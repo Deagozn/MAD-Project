@@ -66,7 +66,7 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BooksViewHol
             // Initialize the TextView
             textViewName = itemView.findViewById(R.id.textViewName);
 
-            // set the OnClickListener on the view
+            // set the OnClickListener on the view.
             itemView.setOnClickListener(this);
         }
 
