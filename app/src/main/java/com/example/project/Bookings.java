@@ -67,6 +67,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private String selectedDate;
     private String startTime;
     private String endTime;
+    private TextView selectedBook;
 
     private int selectedLibrary2;
     private String selectedDate2;
@@ -81,6 +82,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bookings);
         addbooks = findViewById(R.id.add_book);
+        selectedBook = findViewById(R.id.selectedBook);
         addbooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -308,6 +310,9 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
             }
         });
+
+        String bookName = getIntent().getStringExtra("book_name");
+        selectedBook.setText(bookName);
     }
 
     @Override
@@ -369,6 +374,10 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
     }
+
+
+
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

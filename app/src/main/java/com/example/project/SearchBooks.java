@@ -33,7 +33,7 @@ public class SearchBooks extends AppCompatActivity {
     BooksAdapter adapter;
     ArrayList<Books> list;
 
-    private static final String URL_BOOKS = "http://192.168.1.9/My Api/Api.php";
+    private static final String URL_BOOKS = "http://172.22.4.253/My Api/Api.php"; // use your own ip address; to get ip address use 'ipconfig' in command prompt
 
     List<Books> books;
 
@@ -149,4 +149,5 @@ public class SearchBooks extends AppCompatActivity {
         //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
     }
+
 }
