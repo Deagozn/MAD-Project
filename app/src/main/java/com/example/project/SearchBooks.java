@@ -39,7 +39,7 @@ public class SearchBooks extends AppCompatActivity implements BooksAdapter.OnIte
     private String endTime;
 
 
-    private static final String URL_BOOKS = "http://192.168.1.7/My Api/Api.php"; // use your own ip address; to get ip address use 'ipconfig' in command prompt
+    private static final String URL_BOOKS = "http://172.22.4.253/My Api/Api.php"; // use your own ip address; to get ip address use 'ipconfig' in command prompt
 
     List<Books> books;
 

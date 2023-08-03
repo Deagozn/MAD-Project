@@ -41,7 +41,7 @@ public class LibraryFinder extends AppCompatActivity {
         jurong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LibraryFinder.this, Maps.class);
+                Intent intent = new Intent(LibraryFinder.this, MapsActivityDirection.class);
                 intent.putExtra("LATITUDE", 1.3329167111885247);
                 intent.putExtra("LONGITUDE", 103.73949993247449);
                 intent.putExtra("NAME", "Jurong Regional Library");
@@ -54,7 +54,7 @@ public class LibraryFinder extends AppCompatActivity {
         queenstown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LibraryFinder.this, Maps.class);
+                Intent intent = new Intent(LibraryFinder.this, MapsActivityDirection.class);
                 intent.putExtra("LATITUDE", 1.29861379714202);
                 intent.putExtra("LONGITUDE", 103.80516537993356);
                 intent.putExtra("NAME", "Queenstown Public Library");
@@ -68,7 +68,7 @@ public class LibraryFinder extends AppCompatActivity {
         bedok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LibraryFinder.this, Maps.class);
+                Intent intent = new Intent(LibraryFinder.this, MapsActivityDirection.class);
                 intent.putExtra("LATITUDE", 1.3268243723778717);
                 intent.putExtra("LONGITUDE", 103.93168993455336);
                 intent.putExtra("NAME", "Bedok Public Library");
@@ -83,7 +83,7 @@ public class LibraryFinder extends AppCompatActivity {
         tampines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LibraryFinder.this, Maps.class);
+                Intent intent = new Intent(LibraryFinder.this, MapsActivityDirection.class);
                 intent.putExtra("LATITUDE", 1.3522289713983806);
                 intent.putExtra("LONGITUDE", 103.9411640941522);
                 intent.putExtra("NAME", "Tampines Regional Library");
