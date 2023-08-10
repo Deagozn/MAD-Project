@@ -532,7 +532,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         // Populate the bookingsList with data from Firestore for the "Existing" tab
         populateBookingsList();
 
-        // Update the bookingsAdapter and notify it about the data change
+        // Update the bookingsAdapter and notify it about the data change.
         bookingsAdapter.notifyDataSetChanged();
     }
 
