@@ -10,4 +10,5 @@
     <color name="colorPrimary">#3B82BF</color>
     <color name="colorPrimaryDark">#1F5AA6</color>
     <color name="colorAccent">#A7D5F2</color>
+    <color name="selected_seat">#757575</color>
 </resources>

@@ -1,15 +1,15 @@
 package com.example.project;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -83,7 +83,7 @@ public class Chatbot extends AppCompatActivity {
         } else if (userMessage.equalsIgnoreCase("How can i use the app?")) {
             messageList.add(new MessageModal("You can use the app to find libraries around you, book seats, check seat availability and much more.", "bot"));
         } else if (userMessage.equalsIgnoreCase("How do i book a seat?")) {
-            messageList.add(new MessageModal("ou can book a seat by opening the menu, and click bookings. You then can select your which library to book for, when, and which seat you want. You also have the option to reserve a book together with your seat.", "bot"));
+            messageList.add(new MessageModal("You can book a seat by opening the menu, and click bookings. You then can select your which library to book for, when, and which seat you want. You also have the option to reserve a book together with your seat.", "bot"));
         } else if (userMessage.equalsIgnoreCase("Hello, I have a question.")) {
             messageList.add(new MessageModal("Sure, how can I help you?", "bot"));
         } else {

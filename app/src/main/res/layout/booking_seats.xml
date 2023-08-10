@@ -91,7 +91,8 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="65dp"
+                android:id="@+id/seat1"
+                android:layout_width="60dp"
                 android:layout_height="65dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="150dp"
@@ -108,6 +109,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/seat2"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_marginLeft="25dp"
@@ -125,6 +127,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/seat4"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_gravity="right"
@@ -143,6 +146,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/seat3"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_gravity="right"
