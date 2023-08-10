@@ -1,11 +1,5 @@
 package com.example.project;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -54,6 +52,16 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
+
+        username = findViewById(R.id.username);
+        id = findViewById(R.id.iduser);
+
+        String userId = getIntent().getStringExtra("userId");
+        String userName = getIntent().getStringExtra("userName");
+
+        username.setText(userName);
+        id.setText(userId);
+
 
         add_booking=findViewById(R.id.add_booking);
         notif_button = findViewById(R.id.notif_button);
@@ -98,8 +106,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         populateBookingsList();
 
-        username = findViewById(R.id.username);
-        id = findViewById(R.id.iduser);
+
 
     }
 

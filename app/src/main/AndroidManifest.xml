@@ -80,6 +80,8 @@
             android:exported="false"
             android:theme="@style/AppTheme" />
 
+
+
         <service
             android:name=".LocationTracker"
             android:enabled="false"

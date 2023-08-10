@@ -1,11 +1,11 @@
 package com.example.project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Start the main activity
-                Intent intent = new Intent(SplashActivity.this, Dashboard.class);
+                Intent intent = new Intent(SplashActivity.this, LoginPage.class);
                 startActivity(intent);
 
                 // Close the splash activity
