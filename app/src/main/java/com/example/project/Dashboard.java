@@ -8,14 +8,28 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -25,6 +39,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     Button notif_button;
     Button add_booking;
+    ListView bookingdash;
+    TextView username;
+    TextView id;
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+
+    private BookingsAdapter bookingsAdapter;
+    private List<Map<String, Object>> bookingsList = new ArrayList<>();
 
 
 
@@ -65,6 +87,20 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        bookingdash = findViewById(R.id.bookingsdashboard); // Add this ListView in your XML layout
+
+        // Initialize the adapter with the bookingsList
+        bookingsAdapter = new BookingsAdapter(this, bookingsList);
+
+        // Set the adapter to the ListView
+        bookingdash.setAdapter(bookingsAdapter);
+
+        populateBookingsList();
+
+        username = findViewById(R.id.username);
+        id = findViewById(R.id.iduser);
+
     }
 
     @Override
@@ -102,6 +138,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             System.exit(0);
         } else if(item.getItemId() == R.id.nav_qr_code) {
             Intent intent=new Intent(Dashboard.this, QRCode.class);
+            intent.putExtra("username", username.getText().toString());
+            Log.d("debug", username.getText().toString());
+            intent.putExtra("id", id.getText().toString());
+            Log.d("debug", id.getText().toString());
             startActivity(intent);
 
         } else if(item.getItemId()==R.id.nav_seat_map){
@@ -112,6 +152,38 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         startActivity(intent);}
 
         return true;
+    }
+
+    private void populateBookingsList() {
+        firestore.collection("bookings").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            bookingsList.clear(); // Clear the list before adding new data
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                // Extract booking information and create a Map
+                                Map<String, Object> bookingData = new HashMap<>();
+                                bookingData.put("Library", document.getString("Library"));
+                                bookingData.put("Date", document.getString("Date"));
+                                bookingData.put("Start Time", document.getString("Start Time"));
+                                bookingData.put("End Time", document.getString("End Time"));
+                                bookingData.put("Book", document.getString("Book"));
+                                bookingData.put("Seats", document.getString("Seats"));
+
+                                // Add the Map to the bookingsList
+                                bookingsList.add(bookingData);
+                            }
+
+                            // Notify the adapter that data has changed
+                            bookingsAdapter.notifyDataSetChanged();
+                        } else {
+                            Log.d("Error", "Error getting bookings: ", task.getException());
+                        }
+                    }
+                });
+        LinearLayout existingLayout = findViewById(R.id.Existing); // Replace with your existing layout's ID
     }
 
 
