@@ -17,6 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -80,6 +82,10 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     private Button selectSeats;
     private TextView textViewSelectedSeats;
 
+    private ListView existingListView;
+    private List<Map<String, Object>> bookingsList = new ArrayList<>();
+    private BookingsAdapter bookingsAdapter;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +113,16 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
         }
 
+        existingListView = findViewById(R.id.booking_list); // Add this ListView in your XML layout
 
+        // Initialize the adapter with the bookingsList
+        bookingsAdapter = new BookingsAdapter(this, bookingsList);
 
+        // Set the adapter to the ListView
+        existingListView.setAdapter(bookingsAdapter);
+
+        // Populate the bookingsList with data from Firestore
+        populateBookingsList();
 
         addbooks.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,6 +229,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         spec.setIndicator("Existing");
 
         tabHost.addTab(spec);
+
 
 
         spinner.setAdapter(adapter);
@@ -353,11 +368,23 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                                 Log.e("Error", "Error adding booking", e);
                             }
                         });
+                tabHost.setCurrentTab(1);
             }
         });
 
         String bookName = getIntent().getStringExtra("book_name");
         selectedBook.setText(bookName);
+
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                if ("Existing".equals(tabId)) {
+                    // Refresh the "Existing" tab content when tab is changed
+                    refreshExistingTab();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -468,6 +495,49 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    // Method to populate the bookingsList with data from Firestore
+    private void populateBookingsList() {
+        firestore.collection("bookings").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            bookingsList.clear(); // Clear the list before adding new data
+
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                // Extract booking information and create a Map
+                                Map<String, Object> bookingData = new HashMap<>();
+                                bookingData.put("Library", document.getString("Library"));
+                                bookingData.put("Date", document.getString("Date"));
+                                bookingData.put("Start Time", document.getString("Start Time"));
+                                bookingData.put("End Time", document.getString("End Time"));
+                                bookingData.put("Book", document.getString("Book"));
+                                bookingData.put("Seats", document.getString("Seats"));
+
+                                // Add the Map to the bookingsList
+                                bookingsList.add(bookingData);
+                            }
+
+                            // Notify the adapter that data has changed
+                            bookingsAdapter.notifyDataSetChanged();
+                        } else {
+                            Log.d("Error", "Error getting bookings: ", task.getException());
+                        }
+                    }
+                });
+        LinearLayout existingLayout = findViewById(R.id.Existing); // Replace with your existing layout's ID
+    }
+    private void refreshExistingTab() {
+        // Populate the bookingsList with data from Firestore for the "Existing" tab
+        populateBookingsList();
+
+        // Update the bookingsAdapter and notify it about the data change
+        bookingsAdapter.notifyDataSetChanged();
+    }
+
+
+
 }
 
 

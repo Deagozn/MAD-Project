@@ -50,33 +50,6 @@
             android:textSize="34sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView74"
-                android:layout_width="108dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:text="Library:"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_weight="1"
-                android:background="@color/white"
-                tools:ignore="TouchTargetSizeCheck" />
-        </LinearLayout>
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="65dp"
@@ -89,7 +62,7 @@
                 android:layout_width="400dp"
                 android:layout_height="165dp"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/seat_legend" />
+                app:srcCompat="@drawable/seat_legend2" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -118,6 +91,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/mseat1"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_marginLeft="25dp"
@@ -135,6 +109,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/mseat2"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_marginLeft="25dp"
@@ -152,6 +127,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/mseat4"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_gravity="right"
@@ -170,6 +146,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/mseat3"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_gravity="right"

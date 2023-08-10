@@ -9,8 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#3B82BF</color>
     <color name="colorPrimaryDark">#1F5AA6</color>
-    <color name="colorAccent">#A7D5F2</color>
+    <color name="colorAccent">#0317fc</color>
     <color name="selected_seat">#757575</color>
-    <color name="available_seat">#00FF00</color>
-    <color name="taken_seat">#FF0000</color>
+    <color name="available_seat">#8bc34a</color>
+    <color name="taken_seat">#f44336</color>
 </resources>
