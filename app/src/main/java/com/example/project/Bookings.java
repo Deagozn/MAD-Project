@@ -44,6 +44,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+
 public class Bookings extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -368,6 +378,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                                 Log.e("Error", "Error adding booking", e);
                             }
                         });
+                scheduleNotification(startTime);
                 tabHost.setCurrentTab(1);
             }
         });
@@ -532,11 +543,34 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         // Populate the bookingsList with data from Firestore for the "Existing" tab
         populateBookingsList();
 
-        // Update the bookingsAdapter and notify it about the data change.
+        // Update the bookingsAdapter and notify it about the data change
         bookingsAdapter.notifyDataSetChanged();
     }
 
+    private void scheduleNotification(String startTime) {
+        // Convert the start time to milliseconds (assuming startTime is in HH:mm format)
+        String[] timeParts = startTime.split(":");
+        int startHour = Integer.parseInt(timeParts[0]);
+        int startMinute = Integer.parseInt(timeParts[1]);
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, startHour);
+        calendar.set(Calendar.MINUTE, startMinute - 15);
+        calendar.set(Calendar.SECOND, 0);
+
+        // Create a unique notification ID
+        int notificationId = 1;
+
+        // Create a notification intent
+        Intent notificationIntent = new Intent(this, NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, notificationId, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Get the AlarmManager service
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        // Schedule the notification
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
 
 }
 

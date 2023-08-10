@@ -61,7 +61,7 @@ public class MapsActivityDirection extends FragmentActivity implements OnMapRead
 
         double currentLatitude = locationTracker.getLatitude();
         double currentLongitude = locationTracker.getLongitude();
-        LatLng origin = new LatLng(1.3098, 103.7775);
+        LatLng origin = new LatLng(currentLatitude, currentLongitude);
         LatLng dest = new LatLng(lat, lon);
 
         mMap = googleMap;
@@ -82,7 +82,7 @@ public class MapsActivityDirection extends FragmentActivity implements OnMapRead
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
         String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
         String sensor = "sensor=false";
-        String mode = "mode=transit";
+        String mode = "mode=driving";
         // Add your API key here
         String apiKey = "key=AIzaSyDUqwhL74o67qOliukRhbOf7N4gC35mNi0";
 

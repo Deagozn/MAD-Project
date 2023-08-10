@@ -64,7 +64,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
 
         add_booking=findViewById(R.id.add_booking);
-        notif_button = findViewById(R.id.notif_button);
         add_booking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,14 +73,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 
-        notif_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, Notifications.class);
-                startActivity(intent);
-
-            }
-        });
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
