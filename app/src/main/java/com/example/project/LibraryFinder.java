@@ -1,6 +1,7 @@
 package com.example.project;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,8 +43,8 @@ public class LibraryFinder extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LibraryFinder.this, MapsActivityDirection.class);
-                intent.putExtra("LATITUDE", 1.3329167111885247);
-                intent.putExtra("LONGITUDE", 103.73949993247449);
+                intent.putExtra("LATITUDE", 1.333153269168847);
+                intent.putExtra("LONGITUDE", 103.73954291259852);
                 intent.putExtra("NAME", "Jurong Regional Library");
                 startActivity(intent);
             }

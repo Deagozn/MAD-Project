@@ -30,11 +30,15 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -51,11 +55,6 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
     private Button select_date;
 
-    private Button select_seat1;
-    private LinearLayout no_seats_layout;
-    private EditText no_of_ppl;
-    private Button btn_confirm;
-    private String str ="";
     private Spinner spinner;
 
     private Button save;
@@ -78,6 +77,9 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
 
     private Button addbooks;
 
+    private Button selectSeats;
+    private TextView textViewSelectedSeats;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +87,7 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
         setContentView(R.layout.bookings);
         addbooks = findViewById(R.id.add_book);
         selectedBook = findViewById(R.id.selectedBook);
+        textViewSelectedSeats = findViewById(R.id.selected_seats);
 
         // Get the data sent from SearchBooks activity
         Intent intent = getIntent();
@@ -95,11 +98,16 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
             String startTime = intent.getStringExtra("startTime");
             String endTime = intent.getStringExtra("endTime");
 
+
             // Now you have the data, you can use it as needed in the Bookings activity.
             // For example, display the bookName in a TextView
             TextView textViewBookName = findViewById(R.id.selectedBook);
             textViewBookName.setText(bookName);
+
+
         }
+
+
 
 
         addbooks.setOnClickListener(new View.OnClickListener() {
@@ -254,76 +262,97 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
-        no_seats_layout=(LinearLayout) findViewById(R.id.no_seats_layout);
-        no_of_ppl=(EditText) findViewById(R.id.no_of_ppl);
-        btn_confirm=(Button) findViewById(R.id.load_no_of_seats);
-        btn_confirm.setOnClickListener(new View.OnClickListener() {
+        selectSeats = findViewById(R.id.select_seats);
+        selectSeats.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                if(no_of_ppl.getText().toString().length()>0){
-                    try{
-                        no_seats_layout.removeAllViews();
-                    }catch (Throwable e){
-                        e.printStackTrace();
-                    }
-                    int length=Integer.parseInt(no_of_ppl.getText().toString());
-                    for(int i=0;i<length;i++){
-                        int q=i+1;
-                        LinearLayout linearLayout = new LinearLayout(Bookings.this);
-                        linearLayout.setId(i+100);
-                        linearLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-                        no_seats_layout.addView(linearLayout);
-
-                        TextView space= new TextView(Bookings.this);
-                        space.setId(i+200);
-                        space.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        space.setTextSize(16);
-                        space.setText("           ");
-                        space.setTypeface(null, Typeface.BOLD);
-                        linearLayout.addView(space);
-
-                        TextView seat_no= new TextView(Bookings.this);
-                        seat_no.setId(i+200);
-                        seat_no.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        seat_no.setTextSize(16);
-                        seat_no.setText("Seat"+" "+q+":");
-                        seat_no.setTypeface(null, Typeface.BOLD);
-                        linearLayout.addView(seat_no);
-
-                        Button select_seat = new Button(Bookings.this);
-                        select_seat.setId(i+1);
-                        select_seat.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        select_seat.setText("Select Seat");
-                        linearLayout.addView(select_seat);
-
-                        int buttonID=select_seat.getId();
-                        select_seat1=findViewById(buttonID);
-
-                        select_seat1.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                Intent intent = new Intent(Bookings.this, BookingSeats.class);
-                                // Pass the selected information to the BookingSeats activity
-                                intent.putExtra("selectedLibrary", selectedLibrary);
-                                intent.putExtra("selectedDate", selectedDate);
-                                intent.putExtra("startTime", startTime);
-                                intent.putExtra("endTime", endTime);
-                                startActivityForResult(intent, REQUEST_CODE);
-                            }
-                        });
-                    }
-                }
+            public void onClick(View view) {
+                Intent intent = new Intent(Bookings.this, BookingSeats.class);
+                // Pass the selected information to the BookingSeats activity
+                intent.putExtra("selectedLibrary", selectedLibrary);
+                intent.putExtra("selectedDate", selectedDate);
+                intent.putExtra("startTime", startTime);
+                intent.putExtra("endTime", endTime);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
 
         save = findViewById(R.id.book_seats);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Extract seat numbers from the formatted string
+                String selectedSeatsString = textViewSelectedSeats.getText().toString();
+                String[] seatNumberStrings = selectedSeatsString.split(", ");
+                List<Integer> selectedSeatNumbers = new ArrayList<>();
 
+                for (String seatNumberString : seatNumberStrings) {
+                    String number = seatNumberString.replace("seat", "");
+                    selectedSeatNumbers.add(Integer.parseInt(number));
+                }
+                // Update seat status for selected seats
+                for (Integer seatNumber : selectedSeatNumbers) {
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("Status", "Taken");
+
+                    firestore.collection("seat_status")
+                            .whereEqualTo("Seat_Number", seatNumber)
+                            .get()
+                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if (!queryDocumentSnapshots.isEmpty()) {
+                                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                                        String documentId = documentSnapshot.getId();
+
+                                        firestore.collection("seat_status").document(documentId)
+                                                .update(updates)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        // Seat status updated successfully
+                                                        Log.d("Debug", "Seat status updated for seat " + seatNumber);
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.e("Error", "Error updating seat status for seat " + seatNumber, e);
+                                                    }
+                                                });
+                                    }
+                                }
+                            });
+                }
+
+                // Get the selected library from the spinner
+                Spinner spinner = findViewById(R.id.spinner); // Replace with your Spinner's ID
+                int selectedLibraryPosition = spinner.getSelectedItemPosition();
+                CharSequence selectedLibraryName = adapter.getItem(selectedLibraryPosition); // Assuming you have the 'adapter' defined
+
+                // Create a new booking entry
+                Map<String, Object> bookingData = new HashMap<>();
+                bookingData.put("Library", selectedLibraryName.toString());
+                bookingData.put("Date", select_date.getText().toString());
+                bookingData.put("Start Time", start_hours.getText().toString());
+                bookingData.put("End Time", end_hours.getText().toString());
+                bookingData.put("Book", selectedBook.getText().toString());
+                bookingData.put("Seats", textViewSelectedSeats.getText().toString());
+
+                firestore.collection("bookings")
+                        .add(bookingData)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d("Debug", "Booking added with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("Error", "Error adding booking", e);
+                            }
+                        });
             }
         });
 
@@ -342,12 +371,32 @@ public class Bookings extends AppCompatActivity implements AdapterView.OnItemSel
                 selectedDate2 = data.getStringExtra("selectedDate");
                 startTime2 = data.getStringExtra("startTime");
                 endTime2 = data.getStringExtra("endTime");
+                ArrayList<Integer> selectedSeats = data.getIntegerArrayListExtra("selected_seats");
+                Log.d("Debug", "Selected seats: " + selectedSeats);
 
                 spinner.setSelection(selectedLibrary);
                 end_hours.setText(endTime);
                 start_hours.setText(startTime);
                 select_date.setText(selectedDate);
                 selectedBook.setText(bookSelected);
+
+
+
+                if (selectedSeats != null && !selectedSeats.isEmpty()) {
+                    Collections.sort(selectedSeats); // Sort the selectedSeats list in ascending order
+                    StringBuilder selectedSeatsText = new StringBuilder();
+
+                    for (Integer seatNumber : selectedSeats) {
+                        selectedSeatsText.append("seat").append(seatNumber).append(", ");
+                    }
+
+                    // Remove the trailing comma and space
+                    selectedSeatsText.delete(selectedSeatsText.length() - 2, selectedSeatsText.length());
+
+                    textViewSelectedSeats.setText(selectedSeatsText.toString());
+                } else {
+                    textViewSelectedSeats.setText("No seats selected");
+                }
             }
         }
         if (requestCode == REQUEST_CODE_SEARCH_BOOK) {
